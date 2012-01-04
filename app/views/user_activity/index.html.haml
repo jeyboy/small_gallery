@@ -1,0 +1,11 @@
+#users_with_activities
+  %table
+    %tr
+      %th User
+      %th Acts
+
+    - @users.each do |user|
+      %tr
+        %td{:style => user == @user ? "color:red; font-weight: bold;" : ""}= user.email
+        %td{:style => "padding-left : 10px;"}
+          = render :partial => 'acts', :locals => {:user_id => user.id}

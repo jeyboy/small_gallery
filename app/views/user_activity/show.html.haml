@@ -1,0 +1,16 @@
+#activity_menu
+  = render :partial => 'acts', :locals => {:user_id => @user_id}
+  %br
+  %br
+
+#activities
+  - @activities.each do |activity|
+    .activity
+      %strong{:style => "padding-right : 10px;"}= activity.created_at
+      %span= activity.message
+    %br
+
+= will_paginate @activities
+%br
+%br
+

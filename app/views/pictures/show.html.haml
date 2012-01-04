@@ -1,0 +1,24 @@
+#picture
+  = image_tag(@picture.picture.url(:big))
+#like
+  %span Likes
+  %span.likes_count= @picture.likes_count
+  - unless @current_user_like
+    %span.set_like
+      = link_to image_tag('LikeButton.gif', :size => "45x25"), "#", :onclick => "setLike('#{likes_create_path}', '#{@picture.id}');"
+  - else
+    %span You already set like for this picture
+%br
+#comments
+  - @picture.comments.each do |comment|
+    .comment
+      .name= comment.user_email
+      .comment_time= comment.created_at
+      .clear
+      .comment_body= comment.body
+    %br
+
+#add_comment
+  = form_for :comment, :html =>{ :remote => true } do |f|
+    = f.text_area :body, :cols => 40, :rows => 5
+    = f.submit :Comment, :onclick => "sendComment('#{comments_path}', '#{@picture.id}', '#{@user.email}', jQuery('#comment_body').attr('value')); return false;"

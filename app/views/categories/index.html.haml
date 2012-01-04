@@ -1,0 +1,4 @@
+.secondary-navigation
+  %ul.wat-cf
+    - @picture_categories.each do |category|
+      %li= link_to category.title, category_pictures_path(category.title)

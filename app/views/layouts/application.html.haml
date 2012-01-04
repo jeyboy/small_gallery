@@ -1,0 +1,43 @@
+!!!
+%html
+  %head
+    %title Web App
+    = stylesheet_link_tag 'application'
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+  %body
+    #container
+      #header
+        %h1
+          %a{:href => "/"} '(O_o)'
+        #user-navigation
+          %ul.wat-cf
+            - if user_signed_in?
+              %li
+                %a.logout{:href => destroy_user_session_path, 'data-method' => :delete}= t("logout", :default => "Logout")
+            - else
+              %li
+                %a{:href => new_user_registration_path }= t("registration", :default => "Registration")
+              %li
+                %a{:href => new_user_session_path }= t("authorization", :default => "Authorization")
+        #main-navigation
+          %ul.wat-cf
+            %li= link_to 'Picture categories', categories_path
+            %li= link_to 'All pictures', pictures_path
+            %li= link_to 'Comments', comments_path
+            %li= link_to 'User actions', events_path
+
+      #wrapper.wat-cf
+        .flash
+          - flash.each do |type, message|
+            %div{:class => "message #{type}"}
+              %p= message
+        #main
+          = yield
+
+        #sidebar
+          = yield :sidebar
+      #footer
+        .block
+          %p{:style => "text-align: center;"}
+            Copyright &copy; #{Time.now.year} Web App.

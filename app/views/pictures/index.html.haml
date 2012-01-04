@@ -1,0 +1,10 @@
+-if @pictures
+  #pictures
+    - @pictures.each do |picture|
+      %picture
+        = link_to image_tag(picture.picture.url(@size || :normal)), show_category_picture_path(picture.picture_category.title, picture.id)
+        = picture.likes_count
+
+  = will_paginate @pictures
+  %br
+  %br

@@ -1,0 +1,12 @@
+#comments
+  %table
+    - @comments.each do |comment|
+      %tr
+        %td= time_ago_in_words(comment.created_at)
+        %td= image_tag comment.picture.picture.url(:thumb)
+        %td= comment.user_email
+        %td= comment.body
+
+= will_paginate @comments
+%br
+%br
