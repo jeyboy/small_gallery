@@ -1,6 +1,6 @@
 class PicturesController < ApplicationController
   def index
-    @pictures = Picture.joins(:picture_category).where("picture_categories.title = ?", params[:category]).paginate(:page => params[:page], :per_page => 5)
+    @pictures = Picture.joins(:picture_category).where("picture_categories.title = ?", params[:category_id]).paginate(:page => params[:page], :per_page => 5)
   end
 
   def show

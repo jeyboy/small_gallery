@@ -4,20 +4,5 @@ class UserActivity < ActiveRecord::Base
   serialize :info, Hash
   belongs_to :user
 
-  def message
-    case activity_id
-      when 0
-        "go to (#{info[:type]}) #{info[:path]}"
-      when 1
-        "sign in at #{info[:time]}"
-      when 2
-        "sign out at #{info[:time]}"
-      when 3
-        "set like for picture with id #{info[:id]}"
-      when 4
-        "set comment '#{info[:text]}' for picture with id #{info[:id]}"
-      else
-        'Unrecognized type'
-    end
-  end
+  validates :data_type, :uniqueness => {:scope => [:user_id, :created_at]}
 end

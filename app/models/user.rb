@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   def add_act type
     UserActivity.create(
         :user_id => id,
-        :activity_id => UserActivity::ACTIVITY_TYPES[type],
+        :data_type => UserActivity::ACTIVITY_TYPES[type],
         :info => {:time => DateTime.now}
     )
   end

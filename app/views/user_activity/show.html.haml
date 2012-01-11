@@ -7,7 +7,7 @@
   - @activities.each do |activity|
     .activity
       %strong{:style => "padding-right : 10px;"}= activity.created_at
-      %span= activity.message
+      %span= message(activity)
     %br
 
 = will_paginate @activities

@@ -14,7 +14,7 @@ class Like < ActiveRecord::Base
   def add_act
     UserActivity.create(
         :user_id => user_id,
-        :activity_id => UserActivity::ACTIVITY_TYPES['likes'],
+        :data_type => UserActivity::ACTIVITY_TYPES['likes'],
         :info => {:id => picture_id}
     )
   end

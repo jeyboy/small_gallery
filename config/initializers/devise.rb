@@ -207,3 +207,15 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 end
+
+Warden::Manager.after_set_user do |user|
+  if user.is_a?(User)
+    user.add_sign_in_act
+  end
+end
+
+Warden::Manager.before_logout do |user|
+  if user.is_a?(User)
+    user.add_sign_out_act
+  end
+end

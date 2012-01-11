@@ -1,2 +1,2 @@
 - UserActivity::ACTIVITY_TYPES.each do |type|
-  = link_to type.first.humanize, show_activity_path(user_id, type.first), :style => "padding-right : 10px;"
+  = link_to type.first.humanize, user_event_path(user_id, type.first), :style => "padding-right : 10px;"

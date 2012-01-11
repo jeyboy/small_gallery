@@ -2,18 +2,20 @@ Prize::Application.routes.draw do
 
   devise_for :users
 
+  resources :users, :only => [] do
+    resources :user_activity, :as => :events, :only => [:show]
+  end
+
+  resources :user_activity, :as => :events, :only => [:index]
+
   resources :comments, :only => [:create, :index]
+  resources :likes, :only => [:create]
 
-  post "likes/create"
+  resources :categories, :only => [:index] do
+    resources :pictures, :only => [:index, :show]
+  end
 
-  match 'categories' => 'categories#index'
-  match 'categories/:category' => 'pictures#index', :as => :category_pictures
-  match 'categories/:category/:picture_id' => 'pictures#show', :as => :show_category_picture
-  match 'pictures' => 'pictures#show_all'
-
-  match 'events' => 'user_activity#index'
-  match 'events/:user_id/:event_type' => 'user_activity#show', :as => :show_activity
-
+  get :show_all_pictures, :to => "pictures#show_all"
   root :to => 'categories#index'
 
 

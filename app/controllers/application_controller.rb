@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
   def add_user_action
     @user = current_user
     @user.user_activities.create(
-        :activity_id => UserActivity::ACTIVITY_TYPES['navigation'],
+        :data_type => UserActivity::ACTIVITY_TYPES['navigation'],
         :info => {:path => request.fullpath, :type => request.method}
     ) if user_signed_in?
   end

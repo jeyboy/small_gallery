@@ -5,9 +5,5 @@ class Picture < ActiveRecord::Base
   has_many :likes, :dependent => :destroy
   belongs_to :picture_category
 
-  validates :picture_category_id, :numericality => true, :presence => true, :if => :not_new
-
-  def not_new
-    !new_record?
-  end
+  validates :picture_category_id, :numericality => true, :presence => true, :if => :new_record?
 end
